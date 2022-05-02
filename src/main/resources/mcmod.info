@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "chunkbert",
+    "name": "chunkbert",
+    "description": "Extends chunkloading when on a server.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
