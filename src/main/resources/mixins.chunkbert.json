@@ -2,6 +2,7 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.embeddedt.chunkbert.mixin",
+  "refmap": "mixins.chunkbert.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "client": [
     "AnvilChunkLoaderMixin",
@@ -9,7 +10,9 @@
     "ChunkProviderClientMixin",
     "IntegratedServerMixin",
     "MinecraftMixin",
-    "NetHandlerPlayClientMixin"
+    "NetHandlerPlayClientMixin",
+    "vintagium.SodiumGameOptionPagesMixin",
+    "vintagium.VintagiumChunkProviderMixin"
   ],
   "injectors": {
     "defaultRequire": 1

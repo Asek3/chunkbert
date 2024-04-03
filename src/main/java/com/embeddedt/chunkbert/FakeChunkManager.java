@@ -1,6 +1,8 @@
 package com.embeddedt.chunkbert;
 
 import com.embeddedt.chunkbert.ChunkbertConfig;
+import com.embeddedt.chunkbert.compat.IChunkStatusListener;
+import com.embeddedt.chunkbert.ext.ChunkProviderClientExt;
 import io.netty.util.concurrent.DefaultThreadFactory;
 import it.unimi.dsi.fastutil.longs.Long2LongMap;
 import it.unimi.dsi.fastutil.longs.Long2LongOpenHashMap;
@@ -42,6 +44,7 @@ public class FakeChunkManager {
 
     private final WorldClient world;
     private final ChunkProviderClient clientChunkManager;
+    private final ChunkProviderClientExt clientChunkManagerExt;
     private int ticksSinceLastSave;
     private final FakeChunkStorage storage;
     private final FakeChunkStorage fallbackStorage;
@@ -66,6 +69,7 @@ public class FakeChunkManager {
     public FakeChunkManager(WorldClient world, ChunkProviderClient clientChunkManager) {
         this.world = world;
         this.clientChunkManager = clientChunkManager;
+        this.clientChunkManagerExt = (ChunkProviderClientExt) clientChunkManager;
 
         long seedHash = 123456; //((BiomeAccessAccessor) world.getBiomeAccess()).getSeed();
         DimensionType worldKey = world.provider.getDimensionType();
@@ -261,6 +265,11 @@ public class FakeChunkManager {
         fakeChunks.put(ChunkPos.asLong(x, z), chunk);
 
         world.markBlockRangeForRenderUpdate(x * 16, 0, z * 16, x * 16 + 15, 256, z * 16 + 15);
+
+        IChunkStatusListener listener = clientChunkManagerExt.bobby_getListener();
+        if (listener != null) {
+            listener.onChunkAdded(x, z);
+        }
     }
 
     public boolean unload(int x, int z, boolean willBeReplaced) {
@@ -274,6 +283,12 @@ public class FakeChunkManager {
 
             return true;
         }
+
+        IChunkStatusListener listener = clientChunkManagerExt.bobby_getListener();
+        if (listener != null) {
+            listener.onChunkRemoved(x, z);
+        }
+
         return false;
     }
 
