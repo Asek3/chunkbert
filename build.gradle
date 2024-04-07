@@ -4,6 +4,9 @@ plugins {
 
 archivesBaseName = "${project.mod_id}-${project.mod_version}"
 
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
 minecraft {
     mcVersion.set(project.minecraft_version)
     username.set("Developer")
