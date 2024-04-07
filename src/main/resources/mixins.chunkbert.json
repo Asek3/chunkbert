@@ -3,6 +3,7 @@
   "minVersion": "0.8",
   "package": "com.embeddedt.chunkbert.mixin",
   "refmap": "mixins.chunkbert.refmap.json",
+  "plugin": "com.embeddedt.chunkbert.compat.CompatibilityMixinPlugin",
   "compatibilityLevel": "JAVA_8",
   "client": [
     "AnvilChunkLoaderMixin",
