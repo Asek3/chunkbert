@@ -276,6 +276,7 @@ public class FakeChunkManager {
         cancelLoad(x, z);
         Chunk chunk = fakeChunks.remove(ChunkPos.asLong(x, z));
         if (chunk != null) {
+            chunk.onUnload();
             /* TODO fix lighting */
 
             world.loadedTileEntityList.removeAll(chunk.getTileEntityMap().values());
